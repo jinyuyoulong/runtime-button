@@ -3,7 +3,6 @@
 //  RuntimeButton
 //
 //  Created by fans on 16/5/28.
-//  Copyright © 2016年 ielpm. All rights reserved.
 //
 
 #import "UIControl+FF.h"
