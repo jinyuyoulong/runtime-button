@@ -27,7 +27,7 @@ static const char *UIControl_ignoreEvent = "UIControl_ignoreEvent";//绑定事�
 - (void)setFjl_ignoreEvent:(BOOL)fjl_ignoreEvent{
     objc_setAssociatedObject(self, UIControl_ignoreEvent, @(fjl_ignoreEvent), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
+// 复写load方法
 + (void)load{
     Method a = class_getInstanceMethod(self, @selector(sendAction:to:forEvent:));
     Method b = class_getInstanceMethod(self, @selector(_fjl_sendAction:to:forEvent:));
