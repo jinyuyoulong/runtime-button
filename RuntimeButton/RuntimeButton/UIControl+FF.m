@@ -40,10 +40,14 @@ static const char *UIControl_ignoreEvent = "UIControl_ignoreEvent";//绑定事�
     if (self.fjl_acceptEventInterval > 0) {
         self.fjl_ignoreEvent = YES;
         NSLog(@"%f",self.fjl_acceptEventInterval);
-        //延时调用
-        [self performSelector:@selector(setFjl_ignoreEvent:)
-                   withObject:@(NO)
-                   afterDelay:self.fjl_acceptEventInterval];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.fjl_acceptEventInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.fjl_ignoreEvent = NO;
+        });
+        
+//        //延时调用 performSelector会在子线程中使用timer来延时调用setFjl_ignoreEvent:方法，而子线程中没有过timer
+//        [self performSelector:@selector(setFjl_ignoreEvent:)
+//                   withObject:@(NO)
+//                   afterDelay:self.fjl_acceptEventInterval];
     }
     
     [self _fjl_sendAction:selector to:target forEvent:event];
